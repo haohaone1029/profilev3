@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trần Hào Dev | Developer Profile</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Inter", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(0, 255, 255, 0.18), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(147, 51, 234, 0.22), transparent 35%),
+        #050816;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 1180px;
+      margin: auto;
+      padding: 28px 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 22px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(18px);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .logo-box {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #00e5ff, #8b5cf6);
+      box-shadow: 0 0 30px rgba(0,229,255,0.45);
+    }
+
+    .nav-tag {
+      color: #9ca3af;
+      font-size: 14px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 26px;
+      margin-top: 28px;
+      align-items: stretch;
+    }
+
+    .card {
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.28);
+    }
+
+    .intro {
+      padding: 42px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(0,229,255,0.12);
+      border: 1px solid rgba(0,229,255,0.25);
+      color: #67e8f9;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 22px;
+    }
+
+    .intro h1 {
+      font-size: clamp(36px, 7vw, 72px);
+      line-height: 1.02;
+      letter-spacing: -2px;
+      margin-bottom: 18px;
+    }
+
+    .intro h1 span {
+      background: linear-gradient(135deg, #67e8f9, #a78bfa, #f472b6);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .intro p {
+      color: #cbd5e1;
+      font-size: 17px;
+      line-height: 1.8;
+      max-width: 650px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      text-decoration: none;
+      color: #fff;
+      padding: 13px 18px;
+      border-radius: 16px;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.08);
+      transition: 0.25s;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, #06b6d4, #7c3aed);
+      box-shadow: 0 0 35px rgba(124,58,237,0.35);
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 35px rgba(0,0,0,0.35);
+    }
+
+    .profile {
+      padding: 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .avatar {
+      width: 150px;
+      height: 150px;
+      margin: 20px auto;
+      border-radius: 50%;
+      background:
+        linear-gradient(#101827, #101827) padding-box,
+        linear-gradient(135deg, #22d3ee, #8b5cf6, #ec4899) border-box;
+      border: 5px solid transparent;
+      display: grid;
+      place-items: center;
+      font-size: 52px;
+      font-weight: 900;
+      box-shadow: 0 0 60px rgba(34,211,238,0.3);
+    }
+
+    .profile h2 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .profile p {
+      color: #94a3b8;
+      margin-bottom: 20px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(34,197,94,0.13);
+      color: #86efac;
+      border: 1px solid rgba(34,197,94,0.25);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 16px #22c55e;
+    }
+
+    .section {
+      margin-top: 26px;
+      padding: 30px;
+    }
+
+    .section-title {
+      font-size: 26px;
+      margin-bottom: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .skill, .project, .contact {
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(15,23,42,0.65);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: 0.25s;
+    }
+
+    .skill:hover, .project:hover, .contact:hover {
+      transform: translateY(-5px);
+      border-color: rgba(103,232,249,0.35);
+    }
+
+    .skill h3, .project h3, .contact h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .skill p, .project p, .contact p {
+      color: #94a3b8;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .contacts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .contact {
+      text-decoration: none;
+      color: white;
+      display: block;
+    }
+
+    .contact strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 17px;
+    }
+
+    .footer {
+      text-align: center;
+      color: #64748b;
+      padding: 30px 0 10px;
+      font-size: 14px;
+    }
+
+    .code-line {
+      margin-top: 24px;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #67e8f9;
+      font-family: monospace;
+      overflow-x: auto;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .grid, .contacts {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .intro {
+        padding: 30px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+
+      .grid, .contacts {
+        grid-template-columns: 1fr;
+      }
+
+      .intro {
+        padding: 26px;
+      }
+
+      .profile {
+        padding: 24px;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrapper">
+
+    <nav class="navbar">
+      <div class="logo">
+        <div class="logo-box">TH</div>
+        <div>
+          <div>Trần Hào Dev</div>
+          <div class="nav-tag">Developer Profile</div>
+        </div>
+      </div>
+      <div class="nav-tag">VNDEVCODE.COM</div>
+    </nav>
+
+    <section class="hero">
+      <div class="card intro">
+        <div class="badge">⚡ Premium Developer Portfolio</div>
+
+        <h1>Xin chào, mình là <span>Trần Hào Dev</span></h1>
+
+        <p>
+          Mình là lập trình viên chuyên xây dựng website, tool automation,
+          dashboard quản lý, API và các hệ thống hỗ trợ kinh doanh online.
+          Phong cách làm việc: nhanh, gọn, hiện đại và tối ưu trải nghiệm người dùng.
+        </p>
+
+        <div class="buttons">
+          <a href="#contact" class="btn primary">Liên hệ ngay</a>
+          <a href="#projects" class="btn">Xem dự án</a>
+          <a href="https://github.com/YOUR_GITHUB" target="_blank" class="btn">GitHub</a>
+        </div>
+
+        <div class="code-line">
+          const developer = "Tran Hao Dev"; // Build tools, websites & automation
+        </div>
+      </div>
+
+      <div class="card profile">
+        <div class="avatar">TH</div>
+        <h2>Trần Hào Dev</h2>
+        <p>Full-stack Developer • Tool Creator • Automation Builder</p>
+        <div class="status"><span class="dot"></span> Available for work</div>
+      </div>
+    </section>
+
+    <section class="card section">
+      <h2 class="section-title">🧠 Kỹ năng chính</h2>
+      <div class="grid">
+        <div class="skill">
+          <h3>🌐 Website</h3>
+          <p>Thiết kế giao diện đẹp, landing page, dashboard, web dịch vụ.</p>
+        </div>
+
+        <div class="skill">
+          <h3>🐍 Python Tool</h3>
+          <p>Xây dựng tool automation, xử lý dữ liệu, bot và hệ thống tự động.</p>
+        </div>
+
+        <div class="skill">
+          <h3>⚙️ API System</h3>
+          <p>Tích hợp API, quản lý key, kết nối thanh toán và hệ thống backend.</p>
+        </div>
+
+        <div class="skill">
+          <h3>🤖 Automation</h3>
+          <p>Tự động hóa thao tác lặp lại, tối ưu quy trình kinh doanh online.</p>
+        </div>
+
+        <div class="skill">
+          <h3>📊 Dashboard</h3>
+          <p>Giao diện quản trị hiện đại, thống kê, lọc dữ liệu và quản lý user.</p>
+        </div>
+
+        <div class="skill">
+          <h3>🚀 Branding</h3>
+          <p>Xây dựng hình ảnh cá nhân, profile dev và hệ thống dịch vụ chuyên nghiệp.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card section" id="projects">
+      <h2 class="section-title">🔥 Dự án nổi bật</h2>
+      <div class="grid">
+        <div class="project">
+          <h3>VNDEVCODE Tools</h3>
+          <p>Bộ công cụ hỗ trợ automation, marketing và quản lý dịch vụ.</p>
+        </div>
+
+        <div class="project">
+          <h3>API Dashboard</h3>
+          <p>Trang quản trị API, thống kê giao dịch, tài khoản và trạng thái hệ thống.</p>
+        </div>
+
+        <div class="project">
+          <h3>AI Video Tool</h3>
+          <p>Ý tưởng hệ thống tạo video AI, quản lý scene, prompt và tải video.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card section" id="contact">
+      <h2 class="section-title">📞 Thông tin liên hệ</h2>
+
+      <div class="contacts">
+        <a class="contact" href="https://facebook.com/YOUR_FACEBOOK" target="_blank">
+          <strong>Facebook</strong>
+          <p>facebook.com/YOUR_FACEBOOK</p>
+        </a>
+
+        <a class="contact" href="https://www.tiktok.com/@YOUR_TIKTOK" target="_blank">
+          <strong>TikTok</strong>
+          <p>@YOUR_TIKTOK</p>
+        </a>
+
+        <a class="contact" href="https://zalo.me/YOUR_ZALO_NUMBER" target="_blank">
+          <strong>Zalo</strong>
+          <p>YOUR_ZALO_NUMBER</p>
+        </a>
+
+        <a class="contact" href="https://github.com/YOUR_GITHUB" target="_blank">
+          <strong>GitHub</strong>
+          <p>github.com/YOUR_GITHUB</p>
+        </a>
+
+        <a class="contact" href="https://t.me/YOUR_TELEGRAM" target="_blank">
+          <strong>Telegram</strong>
+          <p>@YOUR_TELEGRAM</p>
+        </a>
+
+        <a class="contact" href="https://vndevcode.com" target="_blank">
+          <strong>Website</strong>
+          <p>vndevcode.com</p>
+        </a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      © 2026 Trần Hào Dev. All rights reserved. Built with ❤️ by VNDEVCODE.
+    </footer>
+
+  </main>
+</body>
+</html>
