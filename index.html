@@ -1,734 +1,675 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Trần Hào Dev | MMO Developer</title>
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Inter","Segoe UI",sans-serif;
-}
-
-:root{
-  --bg:#02040a;
-  --card:rgba(8,12,22,.78);
-  --border:rgba(255,255,255,.1);
-  --cyan:#00f5ff;
-  --purple:#8b5cf6;
-  --green:#00ff88;
-  --text:#ffffff;
-  --muted:#9ca3af;
-}
-
-body{
-  min-height:100vh;
-  background:
-    radial-gradient(circle at 15% 20%, rgba(0,245,255,.18), transparent 30%),
-    radial-gradient(circle at 85% 15%, rgba(139,92,246,.18), transparent 35%),
-    radial-gradient(circle at 50% 90%, rgba(0,255,136,.09), transparent 30%),
-    var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
-}
-
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-  background-size:45px 45px;
-  mask-image:linear-gradient(to bottom, rgba(0,0,0,.8), transparent);
-  pointer-events:none;
-}
-
-.wrapper{
-  width:min(1180px, 94%);
-  margin:auto;
-  padding:38px 0;
-}
-
-.profile{
-  position:relative;
-  overflow:hidden;
-  border-radius:34px;
-  background:linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
-  border:1px solid var(--border);
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.03) inset,
-    0 30px 90px rgba(0,0,0,.65),
-    0 0 70px rgba(0,245,255,.08);
-  backdrop-filter:blur(22px);
-}
-
-.profile::before{
-  content:"";
-  position:absolute;
-  width:420px;
-  height:420px;
-  right:-160px;
-  top:-160px;
-  background:radial-gradient(circle, rgba(0,245,255,.22), transparent 65%);
-  filter:blur(12px);
-}
-
-.profile::after{
-  content:"";
-  position:absolute;
-  width:380px;
-  height:380px;
-  left:-150px;
-  bottom:-150px;
-  background:radial-gradient(circle, rgba(139,92,246,.24), transparent 65%);
-  filter:blur(12px);
-}
-
-.content{
-  position:relative;
-  z-index:2;
-  padding:34px;
-}
-
-.nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:18px;
-  margin-bottom:36px;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.brand-logo{
-  width:48px;
-  height:48px;
-  border-radius:16px;
-  display:grid;
-  place-items:center;
-  font-weight:900;
-  letter-spacing:.5px;
-  background:linear-gradient(135deg, var(--cyan), var(--purple));
-  box-shadow:0 0 25px rgba(0,245,255,.3);
-}
-
-.brand-text h3{
-  font-size:18px;
-}
-
-.brand-text p{
-  color:var(--muted);
-  font-size:13px;
-}
-
-.status{
-  padding:10px 16px;
-  border-radius:999px;
-  border:1px solid rgba(0,255,136,.22);
-  background:rgba(0,255,136,.08);
-  color:#a7ffd4;
-  font-size:13px;
-  font-weight:700;
-}
-
-.hero{
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:34px;
-  align-items:center;
-}
-
-.kicker{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:9px 14px;
-  border-radius:999px;
-  border:1px solid rgba(0,245,255,.22);
-  background:rgba(0,245,255,.07);
-  color:#b9fbff;
-  font-weight:700;
-  font-size:13px;
-  margin-bottom:18px;
-}
-
-h1{
-  font-size:clamp(44px, 7vw, 88px);
-  line-height:.96;
-  letter-spacing:-2.5px;
-  margin-bottom:18px;
-  background:linear-gradient(90deg,#fff,var(--cyan),#bda8ff);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-.typing{
-  min-height:32px;
-  font-size:22px;
-  color:#d1d5db;
-  margin-bottom:18px;
-  font-weight:700;
-}
-
-.typing span{
-  color:var(--cyan);
-}
-
-.desc{
-  color:#aeb4c0;
-  line-height:1.85;
-  font-size:16px;
-  max-width:640px;
-}
-
-.actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:14px;
-  margin-top:28px;
-}
-
-.btn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:14px 20px;
-  border-radius:16px;
-  color:#fff;
-  text-decoration:none;
-  font-weight:800;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.06);
-  transition:.3s ease;
-}
-
-.btn.primary{
-  background:linear-gradient(135deg,var(--cyan),var(--purple));
-  box-shadow:0 14px 35px rgba(0,245,255,.16);
-}
-
-.btn:hover{
-  transform:translateY(-4px);
-  box-shadow:0 18px 45px rgba(0,245,255,.18);
-}
-
-.visual{
-  position:relative;
-}
-
-.avatar-card{
-  width:min(390px,100%);
-  margin:auto;
-  padding:20px;
-  border-radius:30px;
-  background:rgba(0,0,0,.28);
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 30px 80px rgba(0,0,0,.45);
-}
-
-.avatar-ring{
-  width:220px;
-  height:220px;
-  margin:8px auto 20px;
-  border-radius:50%;
-  padding:5px;
-  background:conic-gradient(from 180deg,var(--cyan),var(--purple),var(--green),var(--cyan));
-  box-shadow:0 0 45px rgba(0,245,255,.2);
-  animation:spin 7s linear infinite;
-}
-
-@keyframes spin{
-  to{filter:hue-rotate(360deg)}
-}
-
-.avatar{
-  width:100%;
-  height:100%;
-  border-radius:50%;
-  background:
-    radial-gradient(circle at 30% 25%, rgba(0,245,255,.45), transparent 25%),
-    linear-gradient(135deg,#101827,#05070c);
-  border:6px solid #05070c;
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-}
-
-.avatar .code-face{
-  font-size:54px;
-  font-weight:900;
-  color:#fff;
-  text-shadow:0 0 20px rgba(0,245,255,.5);
-}
-
-.mini-terminal{
-  border-radius:20px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.12);
-  background:#05070c;
-}
-
-.terminal-top{
-  display:flex;
-  gap:7px;
-  padding:13px;
-  background:rgba(255,255,255,.06);
-}
-
-.dot{
-  width:11px;
-  height:11px;
-  border-radius:50%;
-  background:#ff5f57;
-}
-
-.dot:nth-child(2){background:#ffbd2e}
-.dot:nth-child(3){background:#28c840}
-
-.terminal-body{
-  padding:16px;
-  color:#9ffcff;
-  font-family:Consolas,monospace;
-  font-size:14px;
-  line-height:1.8;
-}
-
-.terminal-body b{
-  color:#00ff88;
-}
-
-.grid{
-  margin-top:34px;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-}
-
-.stat,.skill,.social{
-  border-radius:22px;
-  background:rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.1);
-  transition:.3s ease;
-}
-
-.stat{
-  padding:22px;
-  text-align:center;
-}
-
-.stat h2{
-  color:var(--cyan);
-  font-size:34px;
-}
-
-.stat p{
-  color:var(--muted);
-  margin-top:6px;
-}
-
-.section{
-  margin-top:34px;
-}
-
-.section-title{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:24px;
-  margin-bottom:18px;
-}
-
-.section-title i{
-  color:var(--cyan);
-}
-
-.skills{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-  gap:14px;
-}
-
-.skill{
-  padding:20px;
-}
-
-.skill:hover,.social:hover,.stat:hover{
-  transform:translateY(-6px);
-  border-color:rgba(0,245,255,.45);
-  box-shadow:0 16px 40px rgba(0,245,255,.1);
-}
-
-.skill i{
-  font-size:30px;
-  color:var(--cyan);
-  margin-bottom:13px;
-}
-
-.skill h3{
-  margin-bottom:7px;
-  font-size:17px;
-}
-
-.skill p{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.5;
-}
-
-.socials{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:14px;
-}
-
-.social{
-  padding:16px;
-  color:#fff;
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-
-.social-logo{
-  width:52px;
-  height:52px;
-  border-radius:16px;
-  object-fit:cover;
-  background:#fff;
-  padding:3px;
-}
-
-.social strong{
-  font-size:16px;
-}
-
-.social span{
-  display:block;
-  margin-top:3px;
-  color:var(--muted);
-  font-size:13px;
-}
-
-.footer{
-  margin-top:34px;
-  padding-top:22px;
-  border-top:1px solid rgba(255,255,255,.08);
-  text-align:center;
-  color:#7d8594;
-  font-size:14px;
-}
-
-.footer b{
-  color:var(--cyan);
-}
-
-@media(max-width:900px){
-  .hero{
-    grid-template-columns:1fr;
-  }
-
-  .visual{
-    order:-1;
-  }
-
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .content{
-    padding:24px;
-  }
-
-  h1{
-    letter-spacing:-1.5px;
-  }
-}
-
-@media(max-width:560px){
-  .nav{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .status{
-    width:100%;
-    text-align:center;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .avatar-ring{
-    width:185px;
-    height:185px;
-  }
-
-  .actions .btn{
-    width:100%;
-    justify-content:center;
-  }
-
-  .typing{
-    font-size:18px;
-  }
-}
-</style>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="vi-vn" lang="vi-vn" xmlns:og="http://ogp.me/ns#" xmlns:fb="https://www.facebook.com/2008/fbml">
+<head prefix="og: http://ogp.me/ns# fb:http://ogp.me/ns/fb# article:http://ogp.me/ns/article#">
+    <meta charset="utf-8" />
+    <meta http-equiv="content-language" content="vi" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="author" content="Infonet" />
+    <meta name='COPYRIGHT' content='&copy; Kiem Sat Online' />
+    <link rel="shortcut icon" href="https://kiemsat.1cdn.vn/assets/img/favicon.ico" />
+    <title>Lừa Đảo Qua Mạng Trần H&#224;o ( Dev ) - Kiểm S&#225;t Online</title>
+        <meta name="robots" content="noodp,index,follow" />
+    <meta name="keywords" content="Trần h&#224;o,trần h&#224;o dev,haomilkroblox.com,napthecao1s.com,hosting1w.website,uytinmmo.vn,@Haomilknn,0559705922" />
+    <meta name="description" content="th&#244;ng tin kẻ lừa đảo ⚠️:
+t&#234;n: Trần H&#224;o 
+Sđt, zalo: 0559705922
+MBBANK: 0559705922 ( TRAN PHUONG NGOC LAN ) LỪA ĐẢO⚠️
+gmail: haohaone1029@gmail.com
+Facebook: https://www.facebook.com/haomundev LỪA ĐẢO ⚠️ 
+https://www.facebook.com/share/19nAsMFhwM/" />
+    <meta property="fb:pages" content="" />
+        <link rel="canonical" href="https://kiemsat.vn/lua-dao-qua-mang-tran-hao-dev-69904.html" />
+            <meta property="og:title" content="Lừa Đảo Qua Mạng Trần H&#224;o ( Dev )" />
+                <meta property="og:image" content="https://kiemsat.1cdn.vn/thumbs/600x315/2025/10/04/screenshot_2025-10-04-19-19-17-51_99c04817c0de5652397fc8b56c3b3817.jpg" />
+            <meta property="og:image" content="https://kiemsat.1cdn.vn/thumbs/600x315/2025/10/04/screenshot_2025-10-04-19-19-17-51_99c04817c0de5652397fc8b56c3b3817.jpg" />
+            <meta property="og:image:width" content="600" />
+    <meta property="article:publisher" content="https://www.facebook.com//" />
+    <meta property="article:author" content="https://www.facebook.com//" />
+
+
+    <meta property="datetimenow" content="4/21/2026 2:57:09 PM" />
+
+    
+    <link href="https://kiemsat.1cdn.vn/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://kiemsat.1cdn.vn/assets/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+	
+	<link href="https://kiemsat.1cdn.vn/assets/css/player.css" rel="stylesheet" />
+
+
+    <link href="https://kiemsat.1cdn.vn/assets/css/font.css?t=202604211457" rel="stylesheet" />
+    <link href="https://kiemsat.1cdn.vn/assets/css/slick.css" rel="stylesheet" />
+    <link href="https://kiemsat.1cdn.vn/assets/css/perfect-scrollbar.css" rel="stylesheet" />
+    <link href="https://kiemsat.1cdn.vn/assets/css/Style.css?t=202604211457" rel="stylesheet" />
+    <link href="https://kiemsat.1cdn.vn/assets/kiemsat-modal-html/css/modal-custom.css?t=202604211457" rel="stylesheet" />
+    <link href="https://kiemsat.1cdn.vn/assets/css/custom.16122025.css?t=202604211457" rel="stylesheet" />
+    <link href="https://kiemsat.1cdn.vn/assets/css/theme-funeral.css" rel="stylesheet" />
+    <script>var imgErr = function (img) { img.src = 'https://kiemsat.1cdn.vn/assets/img/no-image.png'; }</script>
+
+    
+
+
+    <script async=async src="https://www.googletagmanager.com/gtag/js?id=UA-111459468-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-111459468-1');
+    </script>
+
+    <script type="application/ld+json">
+        {
+        "@context"        : "http://schema.org",
+        "@type"           : "WebSite",
+        "name"            : "Kiếm sát - Cơ quan của VKSND tối cao",
+        "alternateName"   : "th&#244;ng tin kẻ lừa đảo ⚠️:
+t&#234;n: Trần H&#224;o 
+Sđt, zalo: 0559705922
+MBBANK: 0559705922 ( TRAN PHUONG NGOC LAN ) LỪA ĐẢO⚠️
+gmail: haohaone1029@gmail.com
+Facebook: https://www.facebook.com/haomundev LỪA ĐẢO ⚠️ 
+https://www.facebook.com/share/19nAsMFhwM/",
+        "url": "https://kiemsat.vn",
+        "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://kiemsat.vn/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+        }
+        }
+    </script>
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type"   : "Organization",
+        "url"     : "https://kiemsat.vn",
+        "logo"    : "https://kiemsat.1cdn.vn/assets/pic/logo_kiemsat_2024_final.png",
+        "contactPoint": [
+        {
+        "@type": "ContactPoint",
+        "telephone": "+84819383555",
+        "contactType": "customer service"
+        },
+        {
+        "@type": "ContactPoint",
+        "telephone": "+84819383555",
+        "contactType": "customer service"
+        }
+        ]
+        }
+    </script>
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "Person",
+        "name": "Kiếm sát - Cơ quan của VKSND tối cao",
+        "url": "https://kiemsat.vn",
+        "sameAs": [
+        ]
+        }
+    </script>
+
+    <style>
+        .headline-makeup {
+            background: url(https://kiemsat.1cdn.vn/assets/images/kiemsat.png);
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="wrapper">
-  <main class="profile">
-    <div class="content">
-
-      <nav class="nav">
-        <div class="brand">
-          <div class="brand-logo">TH</div>
-          <div class="brand-text">
-            <h3>Trần Hào Dev</h3>
-            <p>MMO Developer Portfolio</p>
-          </div>
-        </div>
-
-        <div class="status">
-          <i class="fa-solid fa-circle"></i> Available For Work
-        </div>
-      </nav>
-
-      <section class="hero">
-        <div>
-          <div class="kicker">
-            <i class="fa-solid fa-code"></i>
-            Premium Black Developer Profile
-          </div>
-
-          <h1>Trần Hào Dev</h1>
-
-          <div class="typing">
-            Tôi là <span id="typing"></span>
-          </div>
-
-          <p class="desc">
-            Xin chào, tôi là <b>Trần Hào Dev</b> — lập trình viên theo phong cách
-            <b>MMO Developer</b>, chuyên làm website, tool, bot, dashboard quản lý,
-            API system và giao diện hiện đại. Mục tiêu của tôi là tạo ra sản phẩm
-            đẹp, nhanh, tối ưu và có giá trị thực tế cho kinh doanh online.
-          </p>
-
-          <div class="actions">
-            <a class="btn primary" href="https://www.facebook.com/haomilknn" target="_blank">
-              <i class="fa-brands fa-facebook"></i> Liên hệ Facebook
-            </a>
-            <a class="btn" href="https://github.com/haohaone1029" target="_blank">
-              <i class="fa-brands fa-github"></i> Xem GitHub
-            </a>
-          </div>
-        </div>
-
-        <div class="visual">
-          <div class="avatar-card">
-            <div class="avatar-ring">
-              <div class="avatar">
-                <div class="code-face">&lt;/&gt;</div>
-              </div>
+    <div id="header">
+        <div class="top_head">
+            <div class="khoi1100">
+                <div class="date onecms_currentTime">Thứ 3, 21/04/2026</div>
+<a class="coquan" href="http://www.vksndtc.gov.vn/" target="_blank">Cơ quan của Viện kiểm sát nhân dân tối cao</a>
+<div class="right">
+    <div class="social">
+        <a href="/"><img alt="" src="https://kiemsat.1cdn.vn/assets/css/header/icon1.png" /></a>
+        <a href="/"><img alt="" src="https://kiemsat.1cdn.vn/assets/css/header/icon2.png" /></a>
+        <a href="/"><img alt="" src="https://kiemsat.1cdn.vn/assets/css/header/icon3.png" /></a>
+        <a href="/"><img alt="" src="https://kiemsat.1cdn.vn/assets/css/header/icon4.png" /></a>
+    </div>
+    
+</div>
             </div>
-
-            <div class="mini-terminal">
-              <div class="terminal-top">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-              </div>
-              <div class="terminal-body">
-                <div><b>$</b> init profile</div>
-                <div><b>&gt;</b> name: Tran Hao Dev</div>
-                <div><b>&gt;</b> role: MMO Developer</div>
-                <div><b>&gt;</b> status: premium_mode</div>
-              </div>
+        </div>
+        <div class="bot_head">
+            <div class="khoi1100">
+                <div class="khungAnh logo onecms-logo">
+                    <a class="khungAnhCrop0" href="/">
+                        <img alt="logo" src="https://kiemsat.1cdn.vn/assets/pic/logo_kiemsat_2024_final.png" />
+                    </a>
+                </div>
+                <div class="khungAnh banner">
+                    <div class="khungAnhCrop0">
+                        <ins data-revive-zoneid="1" data-revive-id="716d316f7bcaacaa3c164cfb5fb42f7c"></ins>
+                        <script async=async src="//ads.kiemsat.vn/www/delivery/asyncjs.php"></script>
+                    </div>
+                </div>
+                <div id="open_sub" class="mobile">
+                    <a class="video_mb" href="javascript:;"></a>
+                    <span id="sub_mn"></span>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
-
-      <section class="grid">
-        <div class="stat">
-          <h2>50+</h2>
-          <p>Dự án / Tool</p>
+        <div id="menu" class="c-menu static-page-content" data-api-url="/api/static-page-content" data-view="normal">
+            <div id="fix">
+    <div class="khoi1100">
+        <a class="home" href="/" title="trang chủ"></a>
+        <a href="/su-kien-van-de">Sự kiện - Vấn đề</a>
+        <a href="/kiem-sat-24h">Kiểm sát 24h</a>
+        <a href="/luat-cuoc-song">Luật & Cuộc sống</a>
+        <a href="/phap-luat-nghiep-vu">Pháp luật - Nghiệp vụ</a>
+        <a href="/ban-can-biet">Bạn cần biết</a>
+        <a href="/chung-toi-la-kiem-sat-vien">Chúng tôi là Kiểm sát viên</a>
+        <a href="https://tv.kiemsat.vn">Video</a>
+        <a href="/an-pham">Tạp chí in</a>
+        <a href="/tap-chi-in">Tạp chí Audio<i class="icon-new"></i></a>
+    </div>
+</div>
+            
         </div>
-        <div class="stat">
-          <h2>24/7</h2>
-          <p>Hỗ trợ online</p>
-        </div>
-        <div class="stat">
-          <h2>100%</h2>
-          <p>Responsive</p>
-        </div>
-        <div class="stat">
-          <h2>PRO</h2>
-          <p>Premium UI</p>
-        </div>
-      </section>
 
-      <section class="section">
-        <h2 class="section-title">
-          <i class="fa-solid fa-layer-group"></i> Kỹ năng lập trình
-        </h2>
+        <div id="toolbar">
+            <div class="khoi1100">
+                    <div class="cate">
+                        <a class="active" href="https://kiemsat.vn/ban-can-biet">Bạn cần biết</a>
 
-        <div class="skills">
-          <div class="skill">
-            <i class="fa-brands fa-html5"></i>
-            <h3>HTML / CSS</h3>
-            <p>Thiết kế giao diện web đẹp, dark mode, chuẩn mobile và PC.</p>
-          </div>
+                            <a = href="https://kiemsat.vn/ban-can-biet/tu-van">Tư vấn</a>
+                            <a = href="https://kiemsat.vn/ban-can-biet/van-ban-moi">Văn bản mới</a>
+                    </div>
 
-          <div class="skill">
-            <i class="fa-brands fa-js"></i>
-            <h3>JavaScript</h3>
-            <p>Xử lý hiệu ứng, animation, logic frontend và tương tác người dùng.</p>
-          </div>
-
-          <div class="skill">
-            <i class="fa-brands fa-php"></i>
-            <h3>PHP / API</h3>
-            <p>Xây dựng website, hệ thống API, panel quản lý và backend.</p>
-          </div>
-
-          <div class="skill">
-            <i class="fa-brands fa-python"></i>
-            <h3>Python Tool</h3>
-            <p>Làm tool local, automation, bot, xử lý dữ liệu và dashboard.</p>
-          </div>
-
-          <div class="skill">
-            <i class="fa-solid fa-database"></i>
-            <h3>Database</h3>
-            <p>Quản lý dữ liệu bằng MySQL, SQLite, tối ưu lưu trữ hệ thống.</p>
-          </div>
-
-          <div class="skill">
-            <i class="fa-solid fa-robot"></i>
-            <h3>Automation</h3>
-            <p>Tự động hóa quy trình, bot Telegram, auto task và MMO workflow.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2 class="section-title">
-          <i class="fa-solid fa-share-nodes"></i> Kết nối với tôi
-        </h2>
-
-        <div class="socials">
-          <a class="social" href="https://www.facebook.com/haomilknn" target="_blank">
-            <img class="social-logo" src="https://i.imgur.com/1GHYixo.gif" alt="Facebook">
-            <div>
-              <strong>Facebook</strong>
-              <span>facebook.com/haomilknn</span>
+                <div class="right">
+                    <a class="cocautochuc js-modal-custom-open" data-modal="#so-do" href="#"><i class="icon-people"></i>Cơ cấu tổ chức</a>
+                    <a class="tin24h" href="/tin-moi-nhat"></a>
+                    
+                    <div class="search">
+                        <input id="txt-keyword" type="text" placeholder="Nhập nội dung cần tìm" />
+                        <a id="btn-search" href="javascript:;"></a>
+                    </div>
+                </div>
             </div>
-          </a>
-
-          <a class="social" href="https://www.tiktok.com/@haomundev" target="_blank">
-            <img class="social-logo" src="https://i.imgur.com/DXqFVUP.gif" alt="TikTok">
-            <div>
-              <strong>TikTok</strong>
-              <span>@haomundev</span>
-            </div>
-          </a>
-
-          <a class="social" href="https://t.me/haomilknn07" target="_blank">
-            <img class="social-logo" src="https://i.imgur.com/fWlHefg.png" alt="Telegram">
-            <div>
-              <strong>Telegram</strong>
-              <span>@haomilknn07</span>
-            </div>
-          </a>
-
-          <a class="social" href="https://github.com/haohaone1029" target="_blank">
-            <img class="social-logo" src="https://i.imgur.com/GnvWvka.jpeg" alt="GitHub">
-            <div>
-              <strong>GitHub</strong>
-              <span>github.com/haohaone1029</span>
-            </div>
-          </a>
         </div>
-      </section>
-
-      <div class="footer">
-        © 2026 <b>Trần Hào Dev</b> — MMO Developer Profile Premium Black
-      </div>
 
     </div>
-  </main>
+
+    <div class="ads-sm" style="padding: 12px;">
+        <ins data-revive-zoneid="1" data-revive-id="716d316f7bcaacaa3c164cfb5fb42f7c"></ins>
+        <script async=async src="//ads.kiemsat.vn/www/delivery/asyncjs.php"></script>
+    </div>
+
+    
+
+
+<div id="content">
+    <div class="khoi1100 khoi1">
+        <div class="qcao6 mobile">
+            <ins data-revive-zoneid="18" data-revive-id="716d316f7bcaacaa3c164cfb5fb42f7c"></ins>
+            <script async src="//ads.kiemsat.vn/www/delivery/asyncjs.php"></script>
+        </div>
+        <div class="tin_Detail">
+            <div class="left">
+                <div class="tin1">
+                    <div class="big_tit"><h1>Lừa Đảo Qua Mạng Trần H&#224;o ( Dev )</h1></div>
+					<div id="audio-player" class="mediatec-cleanaudioplayer" style="margin:10px 0; display:none;">
+						<ul data-theme="default">
+							<li id="audio-url" data-title="Lừa Đảo Qua Mạng Trần H&#224;o ( Dev )" data-artist="OneCMS" data-type="mp3" data-url="https://kiemsat.onecmscdn.com/audios/2025/01/10/69904.wav" data-free="false"></li>
+						</ul>
+					</div>
+                    <div class="time">10/01/2025 16:43</div>
+                    <div class="mota"><h2></h2></div>
+
+
+
+                    <div class="noidung">
+                        <table align="center" class="imageBox">
+	<tbody>
+		<tr>
+			<td style="text-align: center;"><img alt="" src="https://kiemsat.1cdn.vn/2025/10/04/screenshot_2025-10-04-19-11-37-05_99c04817c0de5652397fc8b56c3b3817.jpg" style="height: 401px; width: 400px;"></td>
+		</tr>
+		<tr>
+			<td>
+			
+			</td>
+		</tr>
+	</tbody>
+</table><p>thông tin kẻ lừa đảo ⚠️:</p><p>Sđt, zalo: 0559705922</p><p>MBBANK: 0559705922 ( TRAN PHUONG NGOC LAN ) LỪA ĐẢO⚠️</p><p>gmail: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="234b424c4b424c4d461213111a63444e424a4f0d404c4e">[email&#160;protected]</a></p><p>Facebook: <a href="https://www.facebook.com/haomundev">https://www.facebook.com/haomundev</a> LỪA ĐẢO ⚠️</p><p><a href="https://www.facebook.com/share/19nAsMFhwM/">https://www.facebook.com/share/19nAsMFhwM/</a></p><p><a href="https://www.facebook.com/share/179icpFPdL/">https://www.facebook.com/share/179icpFPdL/</a></p><p>Telegram: @Haomilknn LỪA ĐẢO⚠️</p><p>Web: haomilkroblox.com napthecao1s.com LỪA ĐẢO ⚠️ hosting1w.website uytinmmo.vn accgiasieure.com LỪA ĐẢO ⚠️ tranhaodev.top</p><p><img src="https://kiemsat.1cdn.vn/2025/10/04/screenshot_2025-10-04-19-19-17-51_99c04817c0de5652397fc8b56c3b3817.jpg" alt="screenshot_2025-10-04-19-19-17-51_99c04817c0de5652397fc8b56c3b3817.jpg"></p><p><img alt="images-4.jpeg" src="https://kiemsat.1cdn.vn/2025/10/04/images-4.jpeg" "=""></p>
+
+                        
+
+                    </div>
+                    <div class="chuky">
+                    </div>
+                    <div class="lienquan">
+
+
+                    </div>
+                </div>
+                <div class="taibut ban2">
+
+                    <div class="tag">
+                        <a href="/search?q=bạn cần biết" title="Bạn cần biết"><h2>Bạn cần biết</h2></a>
+                    </div>
+
+
+<div id="comment" class="box-comment">
+    <div class="like_share">
+        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://kiemsat.vn/lua-dao-qua-mang-tran-hao-dev-69904.html&display=popup&ref=plugin" class="share_fb">Chia sẻ facebook</a>
+        <a target="_blank" href="https://plus.google.com/share?url=https://kiemsat.vn/lua-dao-qua-mang-tran-hao-dev-69904.html" class="share_gg">Chia sẻ google</a>
+
+        <a href="/print/69904.html" target="_blank" class="print"></a>
+        <a href="/cdn-cgi/l/email-protection#b39c9c8ce0c6d1d9d6d0c78eff520818d2937723520910dc93e2c6d293fe520912ddd493e7c1520914dd93fb959081818788dc939b93f7d6c5939a95f1dcd7ca8edbc7c7c3c0899c9cd8dad6dec0d2c79dc5dd9cdfc6d29ed7d2dc9ec2c6d29eded2ddd49ec7c1d2dd9edbd2dc9ed7d6c59e858a8a83879ddbc7dedf" class="send_email"></a>
+    </div>
+    <div class="form_cm bc-input">
+        <div class="form">
+            <div class="form-group">
+                <textarea class="txt-content" placeholder="Vui lòng nhập tiếng Việt có dấu"></textarea>
+                <label class="control-label help-block"><em></em></label>
+            </div>
+            <a class="btn-send-comment" href="javascript:;">Gửi bình luận</a>
+        </div>
+         <div class="message hidden">
+            <p class="small">
+                Bình luận của bạn đã được gửi và sẽ hiển thị sau khi được duyệt bởi ban biên tập.
+                <br />
+                Ban biên tập giữ quyền biên tập nội dung bình luận để phù hợp với qui định nội dung của Kiểm Sát Online.
+            </p>
+        </div>
+    </div>
+    <div class="sl_sort">
+        <span class="soluong">(<span class="comment-count">0</span>) Bình luận</span>
+        <div class="sort">
+            <span>Xếp theo:</span>
+            <a href="javascript:;" class="comment-sort-by-newest">Thời gian</a>
+            <a class="active comment-sort-by-like" href="javascript:;">Số người thích</a>
+        </div>
+    </div>    
+    <div class="ds_comment bc-content">
+        <!-- comment list -->
+    </div>
+    <div class="no-comment"><p class="small">Bài viết chưa có bình luận nào.</p></div>
+    <div class="bc-more parent-load-more"><a href="#" class="comment-load-more">Xem thêm bình luận</a></div>
+
+</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tin2">
+
+            <div class="qcao1">
+                <ins data-revive-zoneid="5" data-revive-id="716d316f7bcaacaa3c164cfb5fb42f7c"></ins>
+                <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="//ads.kiemsat.vn/www/delivery/asyncjs.php"></script>
+            </div>
+
+            <div class="qcao1">
+                <ins data-revive-zoneid="6" data-revive-id="716d316f7bcaacaa3c164cfb5fb42f7c"></ins>
+                <script async src="//ads.kiemsat.vn/www/delivery/asyncjs.php"></script>
+            </div>
+
+            <div class="docnhieu">
+                <div class="demuc">Đọc nhiều</div>
+                <!--<div class="khungAnhz">
+                    <a target="_blank" class="khungAnhCropz" href="http://kiemsat.vn/thong-bao-gia-han-thoi-han-dang-ky-dat-mua-lich-treo-tuong-lich-de-ban-va-so-cong-tac-nganh-ksnd-nam-2019-51301.html">
+                        <img src="https://kiemsat.1cdn.vn/assets/img/dangkylich.jpg" />
+                    </a>
+                </div>-->
+                <ul>
+
+                        <li>
+                            <h3><a href="https://kiemsat.vn/huong-dan-dac-xa-nam-2026-76407.html"><span>1</span>Hướng dẫn đặc x&#225; năm 2026</a></h3>
+                        </li>
+                        <li>
+                            <h3><a href="https://kiemsat.vn/quy-dinh-moi-ve-thi-hanh-dieu-le-dang-76400.html"><span>2</span>Quy định mới về thi h&#224;nh Điều lệ Đảng</a></h3>
+                        </li>
+                        <li>
+                            <h3><a href="https://kiemsat.vn/thuc-hien-tong-ra-soat-he-thong-van-ban-quy-pham-phap-luat-76436.html"><span>3</span>Thực hiện tổng r&#224; so&#225;t hệ thống văn bản quy phạm ph&#225;p luật</a></h3>
+                        </li>
+
+                </ul>
+            </div>
+
+            <div class="qcao1">
+                <ins data-revive-zoneid="7" data-revive-id="716d316f7bcaacaa3c164cfb5fb42f7c"></ins>
+                <script async src="//ads.kiemsat.vn/www/delivery/asyncjs.php"></script>
+            </div>
+
+            <div class="qcao1">
+                <ins data-revive-zoneid="8" data-revive-id="716d316f7bcaacaa3c164cfb5fb42f7c"></ins>
+                <script async src="//ads.kiemsat.vn/www/delivery/asyncjs.php"></script>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="docthem">
+        <div class="dungbolo khoi1100">
+            <div class="bao_tt">
+                <a class="tieude" href="https://kiemsat.vn/ban-can-biet">Đọc thêm</a>
+            </div>
+            <div class="left">
+                    <div class="item">
+                        <div class="khungAnh">
+                            <a class="khungAnhCrop" href="https://kiemsat.vn/thuc-hien-tong-ra-soat-he-thong-van-ban-quy-pham-phap-luat-76436.html">
+                                <img alt="" src="https://kiemsat.1cdn.vn/thumbs/480x270/2026/04/20/mi7cu6atcqk13hj5fuj7.jpg" />
+                            </a>
+                        </div>
+                        <h4><a class="title" title="Thực hiện tổng r&#224; so&#225;t hệ thống văn bản quy phạm ph&#225;p luật" href="https://kiemsat.vn/thuc-hien-tong-ra-soat-he-thong-van-ban-quy-pham-phap-luat-76436.html">Thực hiện tổng r&#224; so&#225;t hệ thống văn bản quy phạm ph&#225;p luật</a></h4>
+                        <div class="time">20/04/2026 10:03</div>
+                    </div>
+                    <div class="item">
+                        <div class="khungAnh">
+                            <a class="khungAnhCrop" href="https://kiemsat.vn/huong-dan-dac-xa-nam-2026-76407.html">
+                                <img alt="" src="https://kiemsat.1cdn.vn/thumbs/480x270/2026/04/13/3-4-.jpg" />
+                            </a>
+                        </div>
+                        <h4><a class="title" title="Hướng dẫn đặc x&#225; năm 2026" href="https://kiemsat.vn/huong-dan-dac-xa-nam-2026-76407.html">Hướng dẫn đặc x&#225; năm 2026</a></h4>
+                        <div class="time">14/04/2026 07:30</div>
+                    </div>
+                    <div class="item">
+                        <div class="khungAnh">
+                            <a class="khungAnhCrop" href="https://kiemsat.vn/quy-dinh-moi-ve-thi-hanh-dieu-le-dang-76400.html">
+                                <img alt="" src="https://kiemsat.1cdn.vn/thumbs/480x270/2026/04/13/25_3-toancanh2-1-.jpg" />
+                            </a>
+                        </div>
+                        <h4><a class="title" title="Quy định mới về thi h&#224;nh Điều lệ Đảng" href="https://kiemsat.vn/quy-dinh-moi-ve-thi-hanh-dieu-le-dang-76400.html">Quy định mới về thi h&#224;nh Điều lệ Đảng</a></h4>
+                        <div class="time">13/04/2026 18:19</div>
+                    </div>
+
+
+            </div>
+        </div>
+    </div>
 </div>
 
-<script>
-const words = [
-  "MMO Developer",
-  "Full Stack Developer",
-  "Tool Developer",
-  "Website Builder",
-  "Automation Creator"
-];
 
-let wordIndex = 0;
-let charIndex = 0;
-let deleting = false;
-const typingEl = document.getElementById("typing");
 
-function typingEffect(){
-  const current = words[wordIndex];
 
-  if(!deleting){
-    typingEl.textContent = current.substring(0, charIndex + 1);
-    charIndex++;
+    <div id="footer">
+        <div class="top_footer khoi1100">
+    <div class="left">
+        <h2><a href="/">Trang chủ</a></h2>
+        <h2><a href="/su-kien-van-de">Sự kiện - Vấn đề</a></h2>
+        <h2><a href="/luat-cuoc-song">Luật & Cuộc sống</a></h2>
+        <h2><a href="/phap-luat-nghiep-vu">Pháp luật - Nghiệp vụ</a></h2>
+        <h2><a href="/ban-can-biet">Bạn cần biết</a></h2>
+        <h2><a href="/chung-toi-la-kiem-sat-vien">Chúng tôi là Kiểm sát viên</a></h2>
+        <h2><a href="https://tv.kiemsat.vn">Video</a></h2>
+        <h2><a href="/an-pham">Tạp chí in</a></h2>
+        <h2><a href="/tap-chi-in">Tạp chí Audio<i class="icon-new"></i></a></h2>
+    </div>
+    <div class="right">
+        <span>Theo dõi kiemsat.vn</span>
+        <div class="mxh_ft">
+            <a href="https://facebook.com" target="_blank"><img alt="" src="https://kiemsat.1cdn.vn/assets/pic/fb.png" /></a>
+            <a href="https://twitter.com/?lang=vi" target="_blank"><img alt="" src="https://kiemsat.1cdn.vn/assets/pic/tt.png" /></a>
+            <a href="https://google.com" target="_blank"><img alt="" src="https://kiemsat.1cdn.vn/assets/pic/gg.png" /></a>
+        </div>
+    </div>
+</div>
+<div class="mid_footer">
+    <div class="khoi1100">
+        <div class="khungAnh">
+            <a class="khungAnhCrop0" href="/">
+                <img alt="" src="https://kiemsat.1cdn.vn/assets/pic/logo_kiemsat_2024_final.png" />
+            </a>
+        </div>
+        <div class="info">
+            <div class="tt_ft">© Cơ quan của viện kiểm sát nhân dân tối cao</div>
+            <span>Tổng Biên tập: TS. Tôn Thiện Phương</span>
+            <span>Giấy phép hoạt động báo chí điện tử số 326/GP-BTTTT cấp ngày 29/7/2020</span>
+            <span>Mã số chuẩn quốc tế: e - ISSN 3030 - 4202</span>
+            <span>Tạp chí Kiểm sát giữ bản quyền nội dung trên website này.</span>
+            <a class="js-modal-custom-open" data-modal="#so-do" href="#">Giới thiệu cơ cấu tổ chức</a>
+        </div>
+        <div class="address" style="text-align: left;">
+            <div class="tt_ft">Liên hệ</div>
+            
+            <span>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3743424e52594345424e5259775c5e525a445643194159">[email&#160;protected]</a></span>
+            <span>Địa chỉ: Số 09 Phạm Văn Bạch, phường Cầu Giấy, TP Hà Nội</span>
+        </div>
+    </div>
+</div>
+<div class="bot_footer khoi1100">
+    POWERED BY <b><a href="https://onecms.vn" style="text-decoration: none"><span>ONE<span style="color: #666">CMS</span></span></a></b> - A PRODUCT OF <b><span>NEKO</span></b>
+</div>
+        
+    </div>
 
-    if(charIndex === current.length){
-      deleting = true;
-      setTimeout(typingEffect, 1200);
-      return;
-    }
-  }else{
-    typingEl.textContent = current.substring(0, charIndex - 1);
-    charIndex--;
+    <a href="javascript:;" id="go_to_top"><img src="https://kiemsat.1cdn.vn/assets/images/icon_gototop.png" alt="lên đầu trang" /></a>
+    
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://kiemsat.1cdn.vn/assets/js/jquery-1.9.1.min.js"></script>
+    <script src="https://kiemsat.1cdn.vn/assets/js/slick.js?t=2026042114"></script>
+    <script src="https://kiemsat.1cdn.vn/assets/js/perfect-scrollbar.min.js"></script>
+    <script src="https://kiemsat.1cdn.vn/assets/js/main.js?t=202604211457"></script>
+    <script src="https://kiemsat.1cdn.vn/assets/kiemsat-modal-html/js/modal-custom.js?t=202604211457"></script>
+    <script src="https://kiemsat.1cdn.vn/assets/js/custom.16122025.js?t=202604211457"></script>
+    
+    <script>
+        let ___id1cdn_js = document.createElement('script');
+        ___id1cdn_js.src = 'https://id.1cdn.vn/js?id=O-MoQ2EJUEdU';
+        ___id1cdn_js.async = true;
+        document.body.appendChild(___id1cdn_js);
+    </script>
+    
 
-    if(charIndex === 0){
-      deleting = false;
-      wordIndex = (wordIndex + 1) % words.length;
-    }
-  }
+    <div id="so-do" class="modal-custom is-fade">
+        <div class="modal-custom__ovelay js-modal-custom-close"></div>
+        <div class="modal-custom-box">
+            <div class="modal-custom-box__head">
+                <div class="modal-custom-box__title">Giới thiệu cơ cấu tổ chức</div>
+                <span class="modal-custom-box__close js-modal-custom-close">x</span>
+            </div>
+            <div class="modal-custom-box__content">
+                <img src="https://kiemsat.1cdn.vn/assets/kiemsat-modal-html/upload/so-do-tap-chi-dien-tu-kiem-sat_6_v2.jpg" />
+            </div>
+        </div>
+    </div>
+    
 
-  setTimeout(typingEffect, deleting ? 45 : 85);
-}
 
-typingEffect();
+    <!-- Modal -->
+    <div id="modalComment" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Gửi ý kiến</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form">
+                        <div class="form-group">
+                            <input type="text" id="txtName" class="form-control" placeholder="Họ và tên..." />
+                            <label class="control-label help-block" for="txtName">
+                                <em></em>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="txtEmail" class="form-control" placeholder="Email..." />
+                            <label class="control-label help-block" for="txtEmail">
+                                <em></em>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="txtPhone" class="form-control" placeholder="Điện thoại..." />
+                            <label class="control-label help-block" for="txtPhone">
+                                <em></em>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                    <button type="button" id="btnSendComment" class="btn btn-info">Gửi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modalFeedback" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Đóng góp ý kiến, giúp ICTNEWS sửa lỗi</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form">
+                        <div class="form-group">
+                            <input type="text" id="txtName2" class="form-control" placeholder="Họ và tên..." />
+                            <label class="control-label help-block" for="txtName2">
+                                <em></em>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="txtEmail2" class="form-control" placeholder="Email..." />
+                            <label class="control-label help-block" for="txtEmail2">
+                                <em></em>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="txtPhone2" class="form-control" placeholder="Điện thoại..." />
+                            <label class="control-label help-block" for="txtPhone2">
+                                <em></em>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="txtContent2" class="form-control" placeholder="Nội dung..."></textarea>
+                            <label class="control-label help-block" for="txtContent2">
+                                <em></em>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <button type="button" id="btnSendFeedback" class="btn btn-info">Gửi ý kiến</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-document.querySelectorAll(".skill,.social,.stat,.avatar-card").forEach(card=>{
-  card.addEventListener("mousemove", e=>{
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    card.style.background = `
-      radial-gradient(circle at ${x}px ${y}px, rgba(0,245,255,.13), rgba(255,255,255,.045) 38%)
-    `;
-  });
+    <script type="text/javascript" src="https://kiemsat.1cdn.vn/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/script/ui-69904.js"></script>
+	<script src="https://kiemsat.1cdn.vn/assets/js/jquery.cleanaudioplayer.js"></script>
+	
+    <script type="text/javascript">
+    var WebControl = WebControl || {};
+    WebControl.PublisherId = 69904;
+    WebControl.FriendlyName = 'ban-can-biet';
+            //#log info begin
+        WebControl.item_id = 69904;
+        WebControl.item_published_time = "2025-01-10T16:43:01Z";
+        WebControl.item_title = "Lừa Đảo Qua Mạng Trần H&#224;o ( Dev )";
+        WebControl.item_tags = "";
+        var _authorAlias = "";
+        if (_authorAlias != "") {
+            WebControl.item_authors = [];
+            _authorAlias
+                .split(",")
+                .map((element) => element.trim())
+                .filter((element) => element !== "")
+                .forEach((element) => {
+                    WebControl.item_authors.push({
+                        author_id: 0,
+                        author_name: element,
+                        author_url: ""
+                    });
+                });
+        }
+        WebControl.item_channel = {
+            channel_id: 77,
+            channel_name: "Bạn cần biết",
+            channel_url: "https://kiemsat.vn/ban-can-biet"
+        };
+        WebControl.item_channels = [
+            {
+                channel_id: 77,
+                channel_name: "Bạn cần biết",
+                channel_url: "https://kiemsat.vn/ban-can-biet"
+            }
+        ];
+        //#log info end
+    WebControl.f_share = 'https://www.facebook.com/sharer/sharer.php?app_id=985220771513216&u=https://kiemsat.vn/ban-can-biet/lua-dao-qua-mang-tran-hao-dev-69904.html';
+    WebControl.g_share = 'https://plus.google.com/share?url=https://kiemsat.vn/ban-can-biet/lua-dao-qua-mang-tran-hao-dev-69904.html';
+    WebControl.PublishedTime = "2025-01-10T16:43:01Z";
+    $(document).ready(function () {
+        WebControl.initDetailPage();
 
-  card.addEventListener("mouseleave", ()=>{
-    card.style.background = "rgba(255,255,255,.045)";
-  });
-});
-</script>
+    })
+	
+	//display audio
+	
+    </script>
 
+
+    <!-- GOOGLE SEARCH STRUCTURED DATA FOR ARTICLE -->
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://kiemsat.vn/lua-dao-qua-mang-tran-hao-dev-69904.html"
+        },
+        "headline": "Lừa Đảo Qua Mạng Trần H&#224;o ( Dev )",
+        "description": "",
+        "image": {
+        "@type": "ImageObject",
+        "url": "https://kiemsat.1cdn.vn/thumbs/600x315/2025/10/04/screenshot_2025-10-04-19-19-17-51_99c04817c0de5652397fc8b56c3b3817.jpg",
+        "width" : 600,
+        "height" : 315
+        },
+        "datePublished": "2025-01-10T16:43:01Z",
+        "dateModified": "2025-01-10T16:43:01Z",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "kiemsat.vn",
+        "logo": {
+        "@type": "ImageObject",
+        "url": "https://kiemsat.1cdn.vn/assets/pic/logo_kiemsat_2024_final.png,
+        "width": 300,
+        "height": 100
+        }
+        }
+        }
+    </script>
+    <!-- GOOGLE BREADCRUMB STRUCTURED DATA -->
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+        {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+        "@id": "http://kiemsat.vn",
+        "name": "Trang chủ"
+        }
+        },{
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+        "@id": "https://kiemsat.vn/ban-can-biet",
+        "name": "Bạn cần biết"
+        }
+        }
+        ]
+        }
+    </script>
+    <script type="text/javascript">
+    (function (w, d) {
+        w['ml'] = w['ml'] || function () { (w['ml'].q = w['ml'].q || []).push(arguments) }
+        var po = d.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = "https://trending.vn/statics/all.js?v=20250110";
+        var s = d.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })(window, document);
+ml();
+    </script>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"ca6899ef5f5f48bbb175db4f6e2950cc","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
